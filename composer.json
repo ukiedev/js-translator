@@ -1,7 +1,7 @@
 {
     "name": "webkid/js-translator",
     "type": "library",
-    "description": ":package_description",
+    "description": "Laravel JS translator",
     "keywords": [
         "Webkid",
         "JsTranslator"
@@ -10,9 +10,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": ":author_website",
+            "name": "Ivan Kolodii",
+            "email": "kolodiy@ukietech.com",
+            "homepage": "http://john.if.ua",
             "role": "Developer"
         }
     ],
