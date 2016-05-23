@@ -19,7 +19,7 @@ class JsTranslatorServiceProvider extends ServiceProvider
 	}
 
 	/**
-	 * Register any package services.
+	 * Register service.
 	 *
 	 * @return void
 	 */
@@ -27,9 +27,9 @@ class JsTranslatorServiceProvider extends ServiceProvider
 	{
 		$this->app['jstranslator'] = $this->app->share(function ($app)
 		{
-			$langs = $app['path.base'].'/resources/lang/' . \App::getLocale();
+			$langPath = $app['path.base'].'/resources/lang/' . \App::getLocale();
 
-			return new JsTranslator($langs, $app['files']);
+			return new JsTranslator($langPath, $app['files']);
 		});
 	}
 }
