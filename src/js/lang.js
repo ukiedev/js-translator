@@ -23,18 +23,10 @@
     }
 
 }(this, function() {
-
-    // Default options //
-
-    var defaults = {
-        defaultLocale: 'en' /** The default locale if not set. */
-    };
-
     // Constructor //
 
     var Lang = function(options) {
         options = options || {};
-        this.defaultLocale = options.defaultLocale || defaults.defaultLocale;
     };
 
     // Methods //
@@ -101,7 +93,7 @@
     Lang.prototype.choice = function(key, count, replacements) {
         // Set default values for parameters replace and locale
         replacements = typeof replacements !== 'undefined' ? replacements : {};
-        
+
         // The count must be replaced if found in the message
         replacements['count'] = count;
 
@@ -152,26 +144,6 @@
     };
 
     /**
-     * Set the current locale.
-     *
-     * @param locale {string} The locale to set.
-     *
-     * @return void
-     */
-    Lang.prototype.setLocale = function(locale) {
-        this.locale = locale;
-    };
-
-    /**
-     * Get the current locale.
-     *
-     * @return {string} The current locale.
-     */
-    Lang.prototype.getLocale = function() {
-        return this.locale || this.defaultLocale;
-    };
-
-    /**
      * Parse a message key into components.
      *
      * @param key {string} The message key to parse.
@@ -184,7 +156,7 @@
         }
         var segments = key.split('.');
         return {
-            source: this.getLocale() + '.' + segments[0],
+            source: segments[0],
             entries: segments.slice(1)
         };
     };
@@ -249,9 +221,9 @@
          * The right delimiter can be [ (exclusive) or ] (inclusive).
          * Beside numbers, you can use -Inf and +Inf for the infinite.
          */
-        
+
         var numbers = this._parseNumbersFromInterval(interval);
-        
+
         var types = {
             'setOfNumbers' : /^\{.*\}$/,
             'bothExclusive': /^(\(|\]|\)).*(\)|\[|\()$/,
@@ -284,8 +256,8 @@
     /**
      * Parse a given string (number, +Inf, -Inf, Inf) to Number.
      *
-     * @param  {String} str 
-     * @return {Number}     
+     * @param  {String} str
+     * @return {Number}
      */
     Lang.prototype._parseNumber = function (str){
         str = str.replace(/Inf\s*?$/i, 'Infinity');
@@ -295,15 +267,15 @@
 
     /**
      * Parse an interval to array.
-     * 
+     *
      * @param  {String} interval
-     * @return {Array} 
+     * @return {Array}
      */
     Lang.prototype._parseNumbersFromInterval = function (interval) {
         var braces = /\[|\]|\{|\}|\(|\)/g;
         var numbers = interval.replace(braces, '').split(/,\s?/);
         var newNumbers = [];
-        
+
         for (var i in numbers) {
             newNumbers.push(this._parseNumber(numbers[i]));
         }
