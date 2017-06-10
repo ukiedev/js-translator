@@ -25,7 +25,7 @@ class JsTranslatorServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app['jstranslator'] = $this->app->share(function ($app)
+		$this->app->singleton('jstranslator', function($app)
 		{
 			$langPath = $app['path.base'].'/resources/lang/' . \App::getLocale();
 
